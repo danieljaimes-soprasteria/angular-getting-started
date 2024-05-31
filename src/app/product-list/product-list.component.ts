@@ -1,14 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { products } from '../products';
+import { Product } from '../product';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit {
+  productList: Product[] = [];
   products = [...products];
 
+  constructor(
+    private productService: ProductService
+  ){}
+
+  ngOnInit(): void {
+    this.getProducts();
+  }
+
+  private getProducts(){
+    this.productService.findAllProducts().subscribe(
+      pruductData => {this.productList = pruductData}
+    );
+  }
   share() {
     window.alert('The product has been shared!');
   }

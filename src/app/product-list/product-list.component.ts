@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { products } from '../products';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
 
@@ -10,7 +9,7 @@ import { ProductService } from '../product.service';
 })
 export class ProductListComponent implements OnInit {
   productList: Product[] = [];
-  products = [...products];
+  
 
   constructor(
     private productService: ProductService
@@ -22,7 +21,7 @@ export class ProductListComponent implements OnInit {
 
   private getProducts(){
     this.productService.findAllProducts().subscribe(
-      pruductData => {this.productList = pruductData}
+      pruductListData => {this.productList = pruductListData}
     );
   }
   share() {
